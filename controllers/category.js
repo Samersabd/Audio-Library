@@ -1,10 +1,28 @@
-exports.getAddCategory =(req,res,next)=>{
-    res.sendFile(path.join(__dirname,'../','views', 'add-category.html'));
+const Category = require('../models/category');
 
-}
 
-exports.postAddProduct=(req, res, next)=>{
-    products.push({name: req.body.name, description:req.body.description});
-    console.log(req.body);
-    res.redirect('/');
+exports.getAddCategory =(req, res ,next)=>{
+    res.render('add-category',{
+        pageTitle: 'Add Category',
+        path: 'add-category',
+        editing:false
+    });
+};
+
+exports.postAddProduct = (req, res, next) =>{
+    const name=req.body.name;
+    const description =req.body.description;
+    const createdAt= new Date();
+    const updatedAt= '';
+    const category = new Category(name,description,createdAt,updatedAt);
+    category
+    .save()
+
+    .then(result =>{
+        console.log('created Category');
+        res.redirect('/');
+    })
+    .catch(err =>{
+
+    })
 }

@@ -13,12 +13,16 @@ class Category{
         return db.collection('categories')
         .insertOne(this)
         .then(result =>{
-            console.log(result);
+           // console.log(result);
+            return this._id;
         })
         .catch(err =>{
             console.log(err);
         });
     }
+
+   
+
 }
 
 module.exports =Category;
