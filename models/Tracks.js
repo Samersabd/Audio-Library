@@ -21,6 +21,20 @@ class Track{
             console.log(err);
         });
     }
+
+    static deleteById(trackId){
+        const db=db.getDb();
+        return db
+        .collection('songs')
+        .deleteOne({_id:new mongodb.objectId(trackId)})
+        .then(result =>{
+            console.log('Deleted');
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    }
+
 }
 
 module.exports =Track;
