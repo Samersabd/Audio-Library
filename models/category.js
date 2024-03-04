@@ -12,14 +12,16 @@ const categorySchema = new Schema ({
         required: true
     },
     createdAt: {
-        type : String,
+        type : Date,
         required: true
     },
     updatedAt: {
-        type : String,
+        type : Date,
         required: false
-    }
-});
+    },
+},
+    {timestamps:true}
+);
 
 module.exports = mongoose.model('Category', categorySchema );
 

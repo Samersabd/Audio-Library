@@ -12,14 +12,20 @@ const tracksSchema = new Schema ({
         required: true
     },
     category: {
-        type : String,
-        required: true
+        type : Schema.Types.ObjectId,
+        required: true,
+        ref: "Category",
     },
     album: {
-        type : String,
-        required: true
+        type : Schema.Types.ObjectId,
+        required: true,
+        ref: "Category",
+        ref: "Category",
     }
-});
+},
+    {timestamps:true}
+
+);
 
 module.exports = mongoose.model('Tracks', tracksSchema );
 
