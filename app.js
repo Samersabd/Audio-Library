@@ -5,14 +5,10 @@ const Tracks = require('./models/Tracks');
 
 const Categorycont = require('./controllers/category');
 
-const http = require('http');
-
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose =require('mongoose');
 // const errorController =require('./controllers/error');
-
-
-const mongoConnect =require('./util/database').mongoConnect;
 
 const app =express();
 
@@ -138,11 +134,15 @@ app.use(testCase);
 //     next();
 // });
 
-// app.use(adminRoutes);
-// app.use(libraryRoutes);
+app.use(adminRoutes);
+app.use(libraryRoutes);
 
 
 
-mongoConnect((client)=>{
-    app.listen(3000);
+mongoose.connect('mongodb+srv://samerabdallah:XwipqeNW8s6nX4HX@cluster0.ldmvpxc.mongodb.net/audio library?retryWrites=true&w=majority&appName=Cluster0')
+.then(result =>{
+app.listen(3000);
+})
+.catch(err =>{
+    console.log(err);
 });

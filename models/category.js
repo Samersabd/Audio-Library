@@ -1,28 +1,53 @@
-const getDb =require('../util/database').getDb;
+const mongoose = require('mongoose');
 
-class Category{
-    constructor(name, description, createdAt, updatedAt){
-        this.name=name;
-        this.description=description;
-        this.createdAt=createdAt;
-        this.updatedAt=updatedAt;
+const Schema = mongoose.Schema;
+
+const categorySchema = new Schema ({
+    name: {
+        type : String,
+        required: true
+    },
+    description: {
+        type : String,
+        required: true
+    },
+    createdAt: {
+        type : String,
+        required: true
+    },
+    updatedAt: {
+        type : String,
+        required: false
     }
+});
+
+module.exports = mongoose.model('Category', categorySchema );
+
+
+
+// class Category{
+//     constructor(name, description, createdAt, updatedAt){
+//         this.name=name;
+//         this.description=description;
+//         this.createdAt=createdAt;
+//         this.updatedAt=updatedAt;
+//     }
     
-    save(){
-        const db =getDb();
-        return db.collection('categories')
-        .insertOne(this)
-        .then(result =>{
-           // console.log(result);
-            return this._id;
-        })
-        .catch(err =>{
-            console.log(err);
-        });
-    }
+//     save(){
+//         const db =getDb();
+//         return db.collection('categories')
+//         .insertOne(this)
+//         .then(result =>{
+//            // console.log(result);
+//             return this._id;
+//         })
+//         .catch(err =>{
+//             console.log(err);
+//         });
+//     }
 
    
 
-}
+// }
 
-module.exports =Category;
+// module.exports =Category;

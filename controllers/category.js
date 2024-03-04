@@ -14,7 +14,12 @@ exports.postAddProduct = (req, res, next) =>{
     const description =req.body.description;
     const createdAt= new Date();
     const updatedAt= '';
-    const category = new Category(name,description,createdAt,updatedAt);
+    const category = new Category({
+        name:name,
+        description:description,
+        createdAt:createdAt,
+        updatedAt:updatedAt
+    });
     category
     .save()
 
