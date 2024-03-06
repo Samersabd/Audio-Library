@@ -16,7 +16,16 @@ const albumSchema = new Schema ({
     },
     lastSongAddedAt: {
         type : Date,
+    },
+    createdBy:{
+        type:String,
+        ref:'User',
+    },
+    updatedby:{
+        type:String,
+        ref:'User',
     }
+    
 }
 ,
     {timestamps:true}

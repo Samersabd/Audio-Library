@@ -18,6 +18,14 @@ const tracksSchema = new Schema ({
     albumId: {
         type : Schema.Types.ObjectId,
         ref: "Album",
+    },
+    createdBy:{
+        type:String,
+        ref:'User',
+    },
+    updatedby:{
+        type:String,
+        ref:'User',
     }
 },
 
