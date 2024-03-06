@@ -1,35 +1,49 @@
-const Albums =require('../models/album');
+const album =require('../models/album');
 
-exports.getAddAlbum =(req, res ,next)=>{
-    res.render('add-album',{
-        pageTitle: 'Add Album',
-        path: 'add-Album',
-        editing:false
-    });
-};
+class AlbumController{
+    async addAlbum(albumObject){
+        const foundalbumname=await album.findOne({
+            name:albumObject.name,
+        }
+        );
+        if(foundalbumname){
+            console.log('the album already exists');
+            // const error =new Error("the category already exists");
+            // error.statusCode = statusCode.conflict;
+            // throw error;
+        }else{
+            const alb = new album({
+                name:albumObject.name,
+                description:albumObject.description,
+                
+            });
+        
+        console.log('album', alb._id);
+        await alb.save();
+        return alb;
+        }
+    }
 
-exports.postAddAlbum = (req, res, next) =>{
-    const name=req.body.name;
-    const description =req.body.description;
-    const showNbTracks =req.body.showNbTracks;
-    const createdAt= new Date();
-    const updatedAt= '';
-    const lastSongAddedAt='';
-    const album = new Album({
-        name:name,
-        description:description,
-        showNbTracks:showNbTracks,
-        createdAt:createdAt,
-        updatedAt:updatedAt,
-        lastSongAddedAt:lastSongAddedAt
-    });
-    album
-    .save()
-    .then(result =>{
-        console.log('created Album');
-        res.redirect('/');
-    })
-    .catch(err =>{
+    async getAlbumById(albumId){
+        const foundAlbum =await album.findOne({_id:albumId});
+        if(!foundAlbum){
+            const error=new Error("Album not found");
+            throw error;
+        }else{
+            return foundAlbum;
+        }
+    }
 
-    })
+    async updateAlbum(albumId, albumObject){
+        const newalbum=await album.findOne({_id:albumId});
+        if(!newalbum){
+            throw new Error('Album Not Found');
+        }
+        await album.updateOne({_id:albumId},{$set:albumObject});
+    }
+    async deleteAlbum(albumId){
+        await album.deleteOne({_id:albumId});
+        console.log(albumId+"Deleted");
+    }
 }
+module.exports=AlbumController;

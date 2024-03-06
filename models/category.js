@@ -11,14 +11,7 @@ const categorySchema = new Schema ({
         type : String,
         required: true
     },
-    createdAt: {
-        type : Date,
-        required: true
-    },
-    updatedAt: {
-        type : Date,
-        required: false
-    },
+ 
 },
     {timestamps:true}
 );

@@ -6,6 +6,8 @@ const categoriesController =require('../controllers/category');
 
 const router =express.Router();
 
+//router.get('/',categoriesController.addCategory());
+
 const products =[];
 
 //router.get('/add-category',categoriesController.getAddCategory);

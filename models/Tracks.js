@@ -11,22 +11,20 @@ const tracksSchema = new Schema ({
         type : String,
         required: true
     },
-    category: {
+    categoryId: {
         type : Schema.Types.ObjectId,
-        required: true,
         ref: "Category",
     },
-    album: {
+    albumId: {
         type : Schema.Types.ObjectId,
-        required: true,
-        ref: "Category",
-        ref: "Category",
+        ref: "Album",
     }
 },
-    {timestamps:true}
+
 
 );
-
+tracksSchema.index({categoryId:1});
+tracksSchema.index({albumId:1});
 module.exports = mongoose.model('Tracks', tracksSchema );
 
 
