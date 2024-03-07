@@ -1,5 +1,5 @@
 const album =require('../models/album');
-
+const Tarckservice=require('./Tracks');
 class AlbumController{
     async addAlbum(albumObject){
         const foundalbumname=await album.findOne({

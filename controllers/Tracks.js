@@ -35,6 +35,16 @@ class TrackController{
         await track.deleteOne({_id:trackId});
         console.log(trackId+"Deleted");
     }
+
+    async getTrackByAlbumId(albumId){
+        const foundTrack=await track.findOne({albumId:albumId});
+        if(!foundTrack){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 }
 
 module.exports=TrackController;
