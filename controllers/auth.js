@@ -1,7 +1,31 @@
 const crypto =require('crypto');
+const {validationResult}=require('express-validator/check');
 const bcrypt =require('bcryptjs');
-
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+
+exports.Signup=(req,res,next)=>{
+    const errora=validationResult(req);
+    if(error.isEmpty()){
+        const error=new Error('Validation failed');
+        error.statusCode =422;
+        error.data=error.array();
+        throw error;
+    }
+    const email =req.body.email;
+    const name= req.body.name;
+    const passsword=req.body.passsword;
+    bcrypt
+    .hash(passsword, 12)
+    .then(hashedPw=>{
+        const user=new User({
+            email:email,
+            passsword:hashedPw,
+            name:name
+        });
+        return user.save();
+    });
+}
 
 exports.getLogin =(req,res,next)=>{
     let message =req.flash('erro');

@@ -1,6 +1,7 @@
 const track =require('../models/Tracks');
-const AlbumController=require('./albums');
-const albumController=new AlbumController;
+const Album_Controller=require('./albums');
+const albumController=Album_Controller;
+
 const CategoryController=require('./category');
 const categoryController=new CategoryController;
 class TrackController{

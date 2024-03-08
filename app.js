@@ -1,6 +1,5 @@
 const Categorycont = require('./controllers/category');
 const categorycont =new Categorycont;
-
 const Albumcont = require('./controllers/albums');
 const albumcont =new Albumcont;
 

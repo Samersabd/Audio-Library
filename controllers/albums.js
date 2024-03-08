@@ -1,5 +1,7 @@
 const album =require('../models/album');
-const Tarckservice=require('./Tracks');
+const TrackController = require('./Tracks');
+//const Tarckservice=require('./Tracks');
+const trackservice=new TrackController();
 class AlbumController{
     async addAlbum(albumObject){
         const foundalbumname=await album.findOne({
@@ -42,8 +44,13 @@ class AlbumController{
         await album.updateOne({_id:albumId},{$set:albumObject});
     }
     async deleteAlbum(albumId){
+        const Trackfound=trackservice.getTrackByAlbumId(albumId);
+        if(Trackfound){
+            console.log('Album Contains songs, Delete Songs before you Delete album');
+        }else{
         await album.deleteOne({_id:albumId});
         console.log(albumId+"Deleted");
+        }
     }
 }
 module.exports=AlbumController;
